@@ -103,7 +103,7 @@ def edit_expense(id):
         return redirect(url_for("index"))
 
     user_doc = users_collection.find_one({"_id": ObjectId(current_user.id)})
-    return render_template("edit.html", expense=expense)
+    return render_template("edit.html", expense=expense,user=user_doc)
 
 
 @app.route("/delete/<id>")
