@@ -1,0 +1,136 @@
+/* ===== Global Font and Background ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5 !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    padding-top: 70px; 
+    
+    background: url("/static/expense-bg.png") no-repeat center center fixed;
+    background-size: cover;
+}
+
+
+
+/* ===== Navbar Styling ===== */
+.navbar {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.navbar-brand {
+    font-weight: bold;
+    color: #ffc107 !important;
+}
+.nav-link {
+    color: #fff !important;
+}
+.nav-link.active {
+    font-weight: bold;
+    color: #ffc107 !important;
+}
+.navbar .dropdown-menu {
+    font-size: 0.95rem;
+}
+
+/* ===== Auth Card (Login/Register/Forgot) ===== */
+.auth-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    max-width: 400px;
+    width: 100%;
+}
+.auth-card h3 {
+    font-weight: bold;
+}
+
+/* ===== Form Styling ===== */
+form input,
+form button {
+    border-radius: 6px;
+}
+form input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, .25);
+}
+form button {
+    background-color: #0d6efd;
+    border: none;
+}
+form button:hover {
+    background-color: #0b5ed7;
+}
+
+/* ===== Expense List Items ===== */
+.list-group-item {
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: all 0.2s ease-in-out;
+}
+.list-group-item:hover {
+    background-color: #e2f0ff;
+    transform: scale(1.01);
+}
+.list-group-item .btn {
+    margin-left: 5px;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+    background-color: #0d6efd;
+}
+.btn-warning {
+    background-color: #ffc107;
+}
+.btn-danger {
+    background-color: #dc3545;
+}
+
+/* ===== Total Section Styling ===== */
+h4 {
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* ===== Utility Classes ===== */
+.card-shadow {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+.section-title {
+    border-left: 4px solid #0d6efd;
+    padding-left: 10px;
+    margin-top: 30px;
+}
+
+/* ===== Responsive Enhancements ===== */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    h2, h3, h4 {
+        font-size: 1.2rem;
+    }
+}
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+}
+.custom-link {
+    color: #180adb; /* Bootstrap primary */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.custom-link:hover {
+    color: #0a58ca; /* darker blue */
+    text-decoration: underline;
+}
+
