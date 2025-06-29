@@ -29,9 +29,31 @@ A personal finance tracking web application built with **Flask**, **MongoDB**, a
 
 ---
 
-## 📸 Screenshots
+### 📸 Screenshots
 
-![Dashboard](()  
+#### 🔐 Login Page
+![Login](Screenshots/login.png)
+
+#### 📝 Add Expenses
+![Add Expenses](Screenshots/AddExpenses.png)
+
+#### 🧾 Summary View
+![Summary](Screenshots/Summary.png)
+
+#### 📈 Visualization
+![Visualize](Screenshots/Visulize.png)
+
+#### 🧑‍💼 Profile
+![Profile](Screenshots/profile.png)
+
+#### 🔄 Forgot Password
+![Forgot Password](Screenshots/ForgetPassword.png)
+
+#### ✏️ Edit Expense
+![Edit](Screenshots/Edit.png)
+
+#### 🔐 Register
+![Register](Screenshots/Register.png)
 
 ---
 
