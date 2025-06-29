@@ -316,11 +316,18 @@ def forgot():
     if request.method == "POST":
         email = request.form["email"]
         user = users_collection.find_one({"email": email})
+
         if user:
             token = s.dumps(email, salt="reset-password")
             link = url_for("reset_password", token=token, _external=True)
-            return f"Password reset link (simulated): <a href='{link}'>{link}</a>"
-        return "Email not found"
+            flash(
+                f"🔗 Password reset link (simulated): <a href='{link}' target='_blank'>{link}</a>",
+                "info",
+            )
+        else:
+            flash("❌ Email not found. Please try again.", "danger")
+        return render_template("forgot_password.html")
+
     return render_template("forgot_password.html")
 
 
@@ -329,12 +336,30 @@ def reset_password(token):
     try:
         email = s.loads(token, salt="reset-password", max_age=600)
     except:
-        return "Invalid or expired token"
+        flash("❌ Reset link expired or invalid.", "danger")
+        return redirect(url_for("forgot"))
+
     if request.method == "POST":
         new_password = request.form["password"]
+
+        # ✅ Password strength check
+        if (
+            len(new_password) < 8
+            or not re.search(r"[A-Z]", new_password)
+            or not re.search(r"[^A-Za-z0-9]", new_password)
+        ):
+            flash(
+                "⚠️ Password must be at least 8 characters, contain one capital letter and one special character.",
+                "warning",
+            )
+            return render_template("reset_password.html")
+
         hashed = bcrypt.generate_password_hash(new_password).decode("utf-8")
         users_collection.update_one({"email": email}, {"$set": {"password": hashed}})
+
+        flash("✅ Password reset successful! Please login.", "success")
         return redirect(url_for("login"))
+
     return render_template("reset_password.html")
 
 

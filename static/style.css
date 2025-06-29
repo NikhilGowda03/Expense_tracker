@@ -5,13 +5,11 @@ html, body {
     background-color: #f0f2f5 !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
-    padding-top: 70px; 
-    
+    padding-top: 70px;
     background: url("/static/expense-bg.png") no-repeat center center fixed;
     background-size: cover;
+    min-height: 100vh;
 }
-
-
 
 /* ===== Navbar Styling ===== */
 .navbar {
@@ -40,7 +38,16 @@ html, body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     max-width: 400px;
     width: 100%;
+    margin: 0 auto;
 }
+
+/* Center on small screens */
+@media (max-width: 576px) {
+    .auth-card {
+        padding: 20px;
+    }
+}
+
 .auth-card h3 {
     font-weight: bold;
 }
@@ -116,21 +123,59 @@ h4 {
     h2, h3, h4 {
         font-size: 1.2rem;
     }
-}
-@media (max-width: 576px) {
-    .navbar-brand {
-        font-size: 1.1rem;
+
+    .table {
+        font-size: 0.85rem;
+    }
+
+    .table thead {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.9rem;
     }
 }
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+    }
+
+    .table thead,
+    .table tbody,
+    .table th,
+    .table td,
+    .table tr {
+        white-space: nowrap;
+    }
+
+    .summary-heading {
+        font-size: 1.1rem;
+        padding: 10px 15px;
+    }
+
+    .edit-container {
+        padding: 1rem !important;
+    }
+}
+
+/* ===== Links ===== */
 .custom-link {
-    color: #180adb; /* Bootstrap primary */
+    color: #180adb;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 }
 
 .custom-link:hover {
-    color: #0a58ca; /* darker blue */
+    color: #0a58ca;
     text-decoration: underline;
 }
-
