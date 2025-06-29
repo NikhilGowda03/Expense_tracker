@@ -103,7 +103,7 @@ def edit_expense(id):
         return redirect(url_for("index"))
 
     user_doc = users_collection.find_one({"_id": ObjectId(current_user.id)})
-    return render_template("edit.html", expense=expense)
+    return render_template("edit.html", expense=expense, user=user_doc)
 
 
 @app.route("/delete/<id>")
@@ -228,6 +228,8 @@ def profile():
 
 from flask import flash  # Make sure this is imported at the top
 
+import re  # Add this at the top of your file for regex
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -237,22 +239,40 @@ def register():
         password = request.form["password"]
         confirm_password = request.form["confirm_password"]
 
-        # 🔹 Check if all fields are filled
+        # 1. All fields required
         if not name or not email or not password or not confirm_password:
             flash("❌ All fields are required.", "danger")
             return redirect(url_for("register"))
 
-        # 🔹 Check if passwords match
+        # 2. Email must be valid & end with @gmail.com
+        email_pattern = r"^[\w\.-]+@gmail\.com$"
+        if not re.match(email_pattern, email):
+            flash(
+                "❌ Email must be a valid Gmail address (e.g., example@gmail.com).",
+                "danger",
+            )
+            return redirect(url_for("register"))
+
+        # 3. Password validation: min 8 chars, 1 uppercase, 1 special char
+        password_pattern = r"^(?=.*[A-Z])(?=.*[\W_]).{8,}$"
+        if not re.match(password_pattern, password):
+            flash(
+                "❌ Password must be at least 8 characters with 1 uppercase letter and 1 special character.",
+                "danger",
+            )
+            return redirect(url_for("register"))
+
+        # 4. Passwords must match
         if password != confirm_password:
             flash("❌ Passwords do not match.", "danger")
             return redirect(url_for("register"))
 
-        # 🔹 Check for existing email
+        # 5. Check if email already exists
         if users_collection.find_one({"email": email}):
-            flash("⚠️ A user with this email already exists.", "warning")
+            flash("⚠️ A user with this email already exists. Try logging in.", "warning")
             return redirect(url_for("register"))
 
-        # 🔹 Store user securely
+        # 6. Register user
         hashed_pw = bcrypt.generate_password_hash(password).decode("utf-8")
         users_collection.insert_one(
             {
@@ -264,7 +284,7 @@ def register():
             }
         )
 
-        flash("✅ Registered successfully! You can now log in.", "success")
+        flash("✅ Registered successfully! Please log in.", "success")
         return redirect(url_for("login"))
 
     return render_template("register.html")
@@ -317,7 +337,6 @@ def reset_password(token):
     return render_template("reset_password.html")
 
 
-# === Run Server ===
 if __name__ == "__main__":
-    print("🚀 Flask server starting on http://127.0.0.1:5000")
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # 👈 Use the PORT from environment
+    app.run(host="0.0.0.0", port=port)
