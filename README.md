@@ -31,7 +31,7 @@ A personal finance tracking web application built with **Flask**, **MongoDB**, a
 
 ## 📸 Screenshots
 
-![Dashboard](https://your-screenshot-link.com/dashboard.png)  
+![Dashboard](()  
 
 ---
 
