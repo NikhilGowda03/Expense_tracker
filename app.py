@@ -17,6 +17,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 import os
+import pymongo
 from werkzeug.utils import secure_filename
 
 # === Flask App Config ===
@@ -24,7 +25,7 @@ app = Flask(__name__)
 app.secret_key = "super-secret"
 
 # === MongoDB Setup ===
-client = MongoClient("mongodb://localhost:27017/")
+client = pymongo.MongoClient(os.environ.get("MONGO_URI"))
 db = client["expense_tracker"]
 expenses_collection = db["expenses"]
 users_collection = db["users"]
